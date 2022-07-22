@@ -1,0 +1,23 @@
+﻿@using Task.Models
+@model InputModel
+
+<h2>Form</h2>
+@using (Html.BeginForm("Submit", "Home", FormMethod.Post))
+{   
+    <table>
+        <div class="editor-label">  
+            @Html.LabelFor(model => model.Input)  
+        </div>
+        <tr>
+            <td>@Html.TextBoxFor(m => m.Input)</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Submit Form" /></td>
+        </tr>
+    </table>
+
+<h4>
+    <b>Output:</b>  @ViewBag.Output <br />
+</h4>
+
+}
