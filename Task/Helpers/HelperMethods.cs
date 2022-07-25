@@ -2,7 +2,7 @@
 {
     public static class HelperMethods
     {
-        public static bool isCorrect(List<string> stringList)
+        public static bool isCorrect(this List<string> stringList)
         {
             foreach (string el in stringList)
             {
@@ -12,10 +12,9 @@
                 }
             }
             return true;
-            
         }
 
-        public static List<string> modifyInput(string inputString)
+        public static List<string> modifyInput(this string inputString)
         {
 
             char[] separators = { ' ', ','};
@@ -25,7 +24,7 @@
             return splitList;
         }
 
-        public static string Counter(List<string> numbersList)
+        public static string Counter(this List<string> numbersList)
         {
             List<string> duplicates = numbersList.GroupBy(x => x)
                 .Where(x => x.Count() > 2)
@@ -34,7 +33,7 @@
                 .ToList();
 
             var outputString = String.Join(", ", duplicates);
-
+            
             return outputString;
         }
     }
