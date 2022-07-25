@@ -2,9 +2,9 @@
 {
     public static class HelperMethods
     {
-        public static bool isCorrect(string[] stringArray)
+        public static bool isCorrect(List<string> stringList)
         {
-            foreach (string el in stringArray)
+            foreach (string el in stringList)
             {
                 if (!el.All(char.IsDigit))
                 {
@@ -15,50 +15,25 @@
             
         }
 
-        public static string[] modifyInput(string inputString)
+        public static List<string> modifyInput(string inputString)
         {
 
             char[] separators = { ' ', ','};
 
-            var splitArray = inputString.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            var splitList = inputString.Split(separators, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            return splitArray;
+            return splitList;
         }
 
-        public static int[] modifyArray(string[] stringArray)
+        public static string Counter(List<string> numbersList)
         {
-            int[] numbers = Array.ConvertAll(stringArray, int.Parse);
-            Array.Sort(numbers);
-            Array.Reverse(numbers);
-            return numbers;
-        }
+            List<string> duplicates = numbersList.GroupBy(x => x)
+                .Where(x => x.Count() > 2)
+                .Select(x => x.Key)
+                .OrderByDescending(x => x)
+                .ToList();
 
-        public static string Counter(int[] intArray)
-        {
-            var prevNumber = intArray[0];
-            int counter = 0;
-            var outputList = new List<int>();
-            for (var i = 1; i < intArray.Length; i++)
-            {
-                if (prevNumber == intArray[i])
-                {
-                    counter++;
-                }
-                else
-                {
-                    if (counter >= 2)
-                    {
-                        outputList.Add(prevNumber);
-                    }
-                    counter = 0;
-                }
-                prevNumber = intArray[i];
-            }
-            if (counter >= 2)
-            {
-                outputList.Add(prevNumber);
-            }
-            var outputString = String.Join(", ", outputList);
+            var outputString = String.Join(", ", duplicates);
 
             return outputString;
         }

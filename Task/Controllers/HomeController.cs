@@ -23,17 +23,16 @@ namespace Task.Controllers
                 return View("Index");
             }
 
-            var splitArray = HelperMethods.modifyInput(model.Input);
+            var splitList = HelperMethods.modifyInput(model.Input);
 
-            if (!HelperMethods.isCorrect(splitArray))
+            if (!HelperMethods.isCorrect(splitList))
             {
                 ViewBag.Output = "Error";
                 return View("Index");
             }
             
-            var numbers = HelperMethods.modifyArray(splitArray);
 
-            var final = HelperMethods.Counter(numbers);
+            var final = HelperMethods.Counter(splitList);
 
             ViewBag.Output = $"[{final}]";
 
